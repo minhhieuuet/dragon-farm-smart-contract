@@ -3,15 +3,8 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-contract DragonFarmCore is ERC721 {
-    constructor() ERC721("DragonFarmNFT", "DFNFT") {
-        dragons.push(Dragon(0, block.timestamp, 0, 0)); // The first dragon
-        _spawnDragon(0, msg.sender, 0, 0);
-        _spawnDragon(0, msg.sender, 0, 0);
-        _spawnDragon(0, msg.sender, 0, 0);
-        _spawnDragon(0, msg.sender, 0, 0);
-    }
+import "./DragonAccessControl.sol";
+abstract contract DragonFarmBase is ERC721, DragonAccessControl {
 
     struct Dragon {
         uint256 genes;
@@ -28,6 +21,7 @@ contract DragonFarmCore is ERC721 {
 
     function spawnDragon(uint256 _genes, address _owner, uint32 matronId, uint32 sireId)
         external
+        onlyCLevel
         returns (uint256)
     {
         return _spawnDragon(_genes, _owner, matronId, sireId);
