@@ -1,0 +1,45 @@
+/* Styles go here */
+.own-dragon {
+   transition: 0.3s;
+}
+.title {
+  text-transform: uppercase;
+  color: red;
+}
+.card {
+  border: 2px solid red;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 1px;
+  border-radius: 10px;
+}
+.card-owner {
+  border: 3px solid green;
+  
+}
+.own-dragon:hover {
+  border-top: 8px solid green !important;
+}
+
+.own-dragon:hover .gene {
+  color: red !important;
+}
+.mate-room {
+  border: 10px solid red;
+  margin-bottom: 50px;
+  border-radius: 20px;
+}
+.mate-room button {
+  width: 150px;
+  height: 70px;
+  padding: 10px;
+  font-size: 30px;
+  background-color: rgb(235, 199, 205);
+  border-radius: 10px;
+  border: none;
+  color: black;
+}
+
+.mate-room button:hover {
+  box-shadow: 2px 2px 2px;
+}
