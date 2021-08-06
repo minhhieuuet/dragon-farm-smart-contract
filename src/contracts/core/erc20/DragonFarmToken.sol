@@ -21,7 +21,7 @@ contract DragonFarmToken is DragonFarmERC20, ReentrancyGuard {
     uint256 public antiBotAmount;
 
     constructor() 
-        DragonFarmERC20("DragonFarmToken", "DFT")
+        DragonFarmERC20("Dragon Farm Token", "DFT")
     {
         _mint(_msgSender(), maxSupply.sub(amountFarm).sub(amountPlayToEarn));
         

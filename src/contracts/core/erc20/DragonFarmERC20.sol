@@ -21,7 +21,7 @@ contract DragonFarmERC20 is Ownable, ERC20 {
     uint256 public sellFeeRate = 5;
     uint256 public buyFeeRate = 2;
 
-    constructor(string memory, string memory) ERC20("DragonFarmToken", "DFT") {
+    constructor(string memory, string memory) ERC20("Dragon Farm Token", "DFT") {
         addressForBosses = _msgSender();
     }
 
