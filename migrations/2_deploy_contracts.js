@@ -1,6 +1,6 @@
 
-const Kitty = artifacts.require("KittyCore");
+const DragonFarmCore = artifacts.require("DragonFarmCore");
 
 module.exports = function (deployer) {
-  deployer.deploy(Kitty);
+  deployer.deploy(DragonFarmCore);
 };
