@@ -2,9 +2,8 @@
 pragma solidity ^0.8.3;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
+import "../core/erc20/DragonFarmToken.sol";
 import "hardhat/console.sol";
 
 contract NFTMarket is ReentrancyGuard {
@@ -15,19 +14,10 @@ contract NFTMarket is ReentrancyGuard {
   address payable owner;
   uint256 listingPrice = 0 ether;
     
-  address nftContractAddress;
-    
+  address nftContract;    
+
   constructor() {
     owner = payable(msg.sender);
-  }
-  
-  modifier hasSetNftContract {
-      require(nftContractAddress != address(0), 'Please set NFT contract Address');
-      _;
-  }
-  
-  function setNFTContractAddress(address _nftContractAddress) external {
-      nftContractAddress = _nftContractAddress;
   }
 
   struct MarketItem {
@@ -43,14 +33,17 @@ contract NFTMarket is ReentrancyGuard {
 
   event MarketItemCreated (
     uint indexed itemId,
-    address indexed nftContract,
     uint256 indexed tokenId,
     address seller,
     address owner,
     uint256 price,
     bool sold
   );
-
+    
+  function setNFTContractAddress(address _nftContractrAddress) public {
+      nftContract = _nftContractrAddress;
+  }
+    
   /* Returns the listing price of the contract */
   function getListingPrice() public view returns (uint256) {
     return listingPrice;
@@ -60,7 +53,7 @@ contract NFTMarket is ReentrancyGuard {
   function createMarketItem(
     uint256 tokenId,
     uint256 price
-  ) public payable nonReentrant hasSetNftContract {
+  ) public payable nonReentrant {
     require(price > 0, "Price must be at least 1 wei");
     require(msg.value == listingPrice, "Price must be equal to listing price");
 
@@ -76,11 +69,10 @@ contract NFTMarket is ReentrancyGuard {
       false
     );
 
-    IERC721(nftContractAddress).transferFrom(msg.sender, address(this), tokenId);
-
+    IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
+    
     emit MarketItemCreated(
       itemId,
-      nftContractAddress,
       tokenId,
       msg.sender,
       address(0),
@@ -93,14 +85,16 @@ contract NFTMarket is ReentrancyGuard {
   /* Transfers ownership of the item, as well as funds between parties */
   function createMarketSale(
     uint256 itemId
-    ) public payable nonReentrant hasSetNftContract {
+    ) public payable nonReentrant {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
-    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
     idToMarketItem[itemId].seller.transfer(msg.value);
-    IERC721(nftContractAddress).transferFrom(address(this), msg.sender, tokenId);
-    idToMarketItem[itemId].owner = payable(msg.sender);
+    IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
+    
+    DragonFarmToken dragonFarmToken = DragonFarmToken(payable(0x4A3d2a11093851e4965FF1db3f74CD3423b6bF32));
+    dragonFarmToken.approve(idToMarketItem[itemId].seller, price);
+    
     idToMarketItem[itemId].sold = true;
     _itemsSold.increment();
     payable(owner).transfer(listingPrice);
