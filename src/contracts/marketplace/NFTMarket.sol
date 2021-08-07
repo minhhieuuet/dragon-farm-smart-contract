@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
+import "hardhat/console.sol";
 
 contract NFTMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
@@ -12,15 +13,25 @@ contract NFTMarket is ReentrancyGuard {
   Counters.Counter private _itemsSold;
 
   address payable owner;
-  uint256 listingPrice = 0.025 ether;
-
+  uint256 listingPrice = 0 ether;
+    
+  address nftContractAddress;
+    
   constructor() {
     owner = payable(msg.sender);
+  }
+  
+  modifier hasSetNftContract {
+      require(nftContractAddress != address(0), 'Please set NFT contract Address');
+      _;
+  }
+  
+  function setNFTContractAddress(address _nftContractAddress) external {
+      nftContractAddress = _nftContractAddress;
   }
 
   struct MarketItem {
     uint itemId;
-    address nftContract;
     uint256 tokenId;
     address payable seller;
     address payable owner;
@@ -47,10 +58,9 @@ contract NFTMarket is ReentrancyGuard {
   
   /* Places an item for sale on the marketplace */
   function createMarketItem(
-    address nftContract,
     uint256 tokenId,
     uint256 price
-  ) public payable nonReentrant {
+  ) public payable nonReentrant hasSetNftContract {
     require(price > 0, "Price must be at least 1 wei");
     require(msg.value == listingPrice, "Price must be equal to listing price");
 
@@ -59,7 +69,6 @@ contract NFTMarket is ReentrancyGuard {
   
     idToMarketItem[itemId] =  MarketItem(
       itemId,
-      nftContract,
       tokenId,
       payable(msg.sender),
       payable(address(0)),
@@ -67,11 +76,11 @@ contract NFTMarket is ReentrancyGuard {
       false
     );
 
-    IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
+    IERC721(nftContractAddress).transferFrom(msg.sender, address(this), tokenId);
 
     emit MarketItemCreated(
       itemId,
-      nftContract,
+      nftContractAddress,
       tokenId,
       msg.sender,
       address(0),
@@ -83,15 +92,14 @@ contract NFTMarket is ReentrancyGuard {
   /* Creates the sale of a marketplace item */
   /* Transfers ownership of the item, as well as funds between parties */
   function createMarketSale(
-    address nftContract,
     uint256 itemId
-    ) public payable nonReentrant {
+    ) public payable nonReentrant hasSetNftContract {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
     require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
     idToMarketItem[itemId].seller.transfer(msg.value);
-    IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
+    IERC721(nftContractAddress).transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].owner = payable(msg.sender);
     idToMarketItem[itemId].sold = true;
     _itemsSold.increment();

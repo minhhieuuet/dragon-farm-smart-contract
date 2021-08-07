@@ -45,33 +45,35 @@ contract DragonFarmToken is DragonFarmERC20, ReentrancyGuard {
 
         bots[_bots] = true;
     }
-
+        
+    
+    
     function _transfer(
         address sender,
         address recipient,
         uint256 amount
     ) internal virtual override {
-        if (
-            antiBotTime > block.timestamp &&
-            amount > antiBotAmount &&
-            bots[sender]
-        ) {
-            revert("Anti Bot");
-        }
+        // if (
+        //     antiBotTime > block.timestamp &&
+        //     amount > antiBotAmount &&
+        //     bots[sender]
+        // ) {
+        //     revert("Anti Bot");
+        // }
 
-        uint256 transferFeeRate = recipient == uniswapV2Pair
-            ? sellFeeRate
-            : (sender == uniswapV2Pair ? buyFeeRate : 0);
+        // uint256 transferFeeRate = recipient == uniswapV2Pair
+        //     ? sellFeeRate
+        //     : (sender == uniswapV2Pair ? buyFeeRate : 0);
 
-        if (
-            transferFeeRate > 0 &&
-            sender != address(this) &&
-            recipient != address(this)
-        ) {
-            uint256 _fee = amount.mul(transferFeeRate).div(100);
-            super._transfer(sender, address(this), _fee); // TransferFee
-            amount = amount.sub(_fee);
-        }
+        // if (
+        //     transferFeeRate > 0 &&
+        //     sender != address(this) &&
+        //     recipient != address(this)
+        // ) {
+        //     uint256 _fee = amount.mul(transferFeeRate).div(100);
+        //     super._transfer(sender, address(this), _fee); // TransferFee
+        //     amount = amount.sub(_fee);
+        // }
 
         super._transfer(sender, recipient, amount);
     }

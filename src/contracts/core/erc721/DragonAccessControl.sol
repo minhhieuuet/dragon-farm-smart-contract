@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-contract DragonAccessControl {
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DragonAccessControl is Ownable{
     // This facet controls access control for DragonFarm. There are four roles managed here:
     //
     //     - The CEO: The CEO can reassign other roles and change the addresses of our dependent smart
@@ -31,7 +34,7 @@ contract DragonAccessControl {
 
     /// @dev Access modifier for CEO-only functionality
     modifier onlyCEO() {
-        require(msg.sender == ceoAddress);
+        require(msg.sender == ceoAddress || msg.sender == owner());
         _;
     }
 
