@@ -236,6 +236,19 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_dragonSoulAddress",
+						"type": "address"
+					}
+				],
+				"name": "setDragonSoulAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "_nftContractrAddress",
 						"type": "address"
 					}
@@ -393,20 +406,20 @@
 				"dweb:/ipfs/QmPZoN9T3cb6o8bGhjBPZcz7im8T8DWhpr3tjLwhJJHx9N"
 			]
 		},
-		"contracts/core/erc20/DragonFarmERC20.sol": {
-			"keccak256": "0xcccf586ecf0c5ddcc3f0d33ae8ebf57faebd2eb89cdd36405baf3448098e8615",
+		"contracts/core/erc20/DragonSoul.sol": {
+			"keccak256": "0x50ba0affea7210840e64b75bbe498fcb8cf0ea869d14c1894458dde3c8f757ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd60e5c0cc6179d3f6bac6680d59653fa2bd6ae41f929bc38dd7aa216ab201ea",
-				"dweb:/ipfs/QmR5TxomVVbjvyrjhN4HcPwQu8148ZDxHvamksoAkSRBVM"
+				"bzz-raw://be899a5646eae8364c2b2ae619fa7eaebe0e8ef14c11e08964798433c46cbfc9",
+				"dweb:/ipfs/QmaVvqeJksyEiaiiSLx1Cp5neYJZ3PAkzu9gPdkkd5cgUA"
 			]
 		},
-		"contracts/core/erc20/DragonFarmToken.sol": {
-			"keccak256": "0x3e147d828b6885261b2602f11b969434f821e975a035e1eae3f0f4d875fd02ab",
+		"contracts/core/erc20/DragonSoulERC20.sol": {
+			"keccak256": "0x833b34d849ad6d1d802606403003dc23e8f7c48874b10762dbe10a2a028bd821",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f2a664503b7bbe9dbfbcaeb4d6bf765b4ad3dadedb3fda34653be9c05bb2dd9f",
-				"dweb:/ipfs/QmRKWEKPpDtU6FRnk1vvYg4MX8y2X9sGAkxQVAGvLdYnWR"
+				"bzz-raw://16ae06093961e60b554d9186a071b0438173a694cbc6b598c03eb1d26b57d527",
+				"dweb:/ipfs/QmP8cSfP7pVeewQq5cxN5UJT88vUNp3xAakQDuPVxj82Jb"
 			]
 		},
 		"contracts/core/erc20/ReentrancyGuard.sol": {
@@ -426,11 +439,11 @@
 			]
 		},
 		"contracts/marketplace/Market.sol": {
-			"keccak256": "0x4239bf8ccd9a2c6cd48367176e7999b35a504b46ccd89c65e6ead18bd76f3084",
+			"keccak256": "0xe4d8fb749f6471547615e1f2d8c8cdbe647847daa3c7787f6a48c5b08926eecd",
 			"license": "MIT OR Apache-2.0",
 			"urls": [
-				"bzz-raw://a517f0ac72cc8d1e0323681cbe48a680f504f7fcb63f5ccba11f19c824654384",
-				"dweb:/ipfs/QmcfbX5uBrAhKLm8RxL97tanATNowapcyKH5ijg47JAsgb"
+				"bzz-raw://e93225229e457655b1b544684b6d74f70760942460fd807c9d785eb59496e7f2",
+				"dweb:/ipfs/QmcbfzFuTmEmXQr6xw8w6XQSaiNM5oyPFM4N6Xq8Fw5tbr"
 			]
 		},
 		"hardhat/console.sol": {

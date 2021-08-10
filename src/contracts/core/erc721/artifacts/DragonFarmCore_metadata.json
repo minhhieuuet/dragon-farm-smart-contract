@@ -179,19 +179,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "buyDragon",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "ceoAddress",
 				"outputs": [
@@ -851,20 +838,20 @@
 				"dweb:/ipfs/QmPZoN9T3cb6o8bGhjBPZcz7im8T8DWhpr3tjLwhJJHx9N"
 			]
 		},
-		"contracts/core/erc20/DragonFarmERC20.sol": {
-			"keccak256": "0xcccf586ecf0c5ddcc3f0d33ae8ebf57faebd2eb89cdd36405baf3448098e8615",
+		"contracts/core/erc20/DragonSoul.sol": {
+			"keccak256": "0x50ba0affea7210840e64b75bbe498fcb8cf0ea869d14c1894458dde3c8f757ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd60e5c0cc6179d3f6bac6680d59653fa2bd6ae41f929bc38dd7aa216ab201ea",
-				"dweb:/ipfs/QmR5TxomVVbjvyrjhN4HcPwQu8148ZDxHvamksoAkSRBVM"
+				"bzz-raw://be899a5646eae8364c2b2ae619fa7eaebe0e8ef14c11e08964798433c46cbfc9",
+				"dweb:/ipfs/QmaVvqeJksyEiaiiSLx1Cp5neYJZ3PAkzu9gPdkkd5cgUA"
 			]
 		},
-		"contracts/core/erc20/DragonFarmToken.sol": {
-			"keccak256": "0x3e147d828b6885261b2602f11b969434f821e975a035e1eae3f0f4d875fd02ab",
+		"contracts/core/erc20/DragonSoulERC20.sol": {
+			"keccak256": "0x833b34d849ad6d1d802606403003dc23e8f7c48874b10762dbe10a2a028bd821",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f2a664503b7bbe9dbfbcaeb4d6bf765b4ad3dadedb3fda34653be9c05bb2dd9f",
-				"dweb:/ipfs/QmRKWEKPpDtU6FRnk1vvYg4MX8y2X9sGAkxQVAGvLdYnWR"
+				"bzz-raw://16ae06093961e60b554d9186a071b0438173a694cbc6b598c03eb1d26b57d527",
+				"dweb:/ipfs/QmP8cSfP7pVeewQq5cxN5UJT88vUNp3xAakQDuPVxj82Jb"
 			]
 		},
 		"contracts/core/erc20/ReentrancyGuard.sol": {
@@ -900,11 +887,11 @@
 			]
 		},
 		"contracts/core/erc721/DragonFarmCore.sol": {
-			"keccak256": "0x7b0facef14392070108f4a79ca9d17602b4c371045b620a5a8be42ee461c4b0f",
+			"keccak256": "0x2ce30bd3ac834af17ec56478c634534e728a3372e90494ea7caffa154e6c79ea",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://118b25d4c83452f51b3c7cb8586c70a05044a9aeeefa12a3f1df86448969ec48",
-				"dweb:/ipfs/QmWtsuezsPLFe5PD6gtNs8LPcNKTeNGPtwCgtAx1DrtXfi"
+				"bzz-raw://cdc789cb5c5d5f54c6f2f36c5cf0240a5b97d6707c879dade87fe2889bad08fa",
+				"dweb:/ipfs/QmU1BWngeN5WweqsSYxzoUCtgBVBqxm2sLh4bAkFJpm4ct"
 			]
 		}
 	},

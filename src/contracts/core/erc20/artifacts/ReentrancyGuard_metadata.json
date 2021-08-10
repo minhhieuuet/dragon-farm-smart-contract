@@ -19,7 +19,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/core/erc20/ReentrancyGuard.sol": "ReentrancyGuard"
+			"contracts/core/erc20/Submitcontract.sol": "ReentrancyGuard"
 		},
 		"evmVersion": "berlin",
 		"libraries": {},
@@ -33,12 +33,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/core/erc20/ReentrancyGuard.sol": {
-			"keccak256": "0x272371bd6845d5798157a0eaf3fcdcbead79c2ab7cd1261eb321ae90b7463577",
+		"contracts/core/erc20/Submitcontract.sol": {
+			"keccak256": "0x397f73b94663002d4792349290460d3d20408abf32b600508dfb25d248c87b6b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a8d659296eb3efc4fc712828f3aa55d14a0897f418285e542e417dc70c6a51c3",
-				"dweb:/ipfs/Qmeg7JTnCNXvR4M4vUzwpmzRhnpkGb5Na4UqetGANjrA9M"
+				"bzz-raw://e78f5bc7dcb0a884c89f5698a35a7c7201d451905ac23dcb12b9cc11db701476",
+				"dweb:/ipfs/QmQTYs6NZXqxQivua6Apmt2gaR3Dc8tjmR9qiCoTgFJc44"
 			]
 		}
 	},

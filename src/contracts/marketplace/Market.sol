@@ -3,7 +3,8 @@ pragma solidity ^0.8.3;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "../core/erc20/DragonFarmToken.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../core/erc20/DragonSoul.sol";
 import "hardhat/console.sol";
 
 contract NFTMarket is ReentrancyGuard {
@@ -12,6 +13,8 @@ contract NFTMarket is ReentrancyGuard {
   Counters.Counter private _itemsSold;
 
   address payable owner;
+  address manager;
+  address dragonSoulAddress;
   uint256 listingPrice = 0 ether;
     
   address nftContract;    
@@ -39,8 +42,17 @@ contract NFTMarket is ReentrancyGuard {
     uint256 price,
     bool sold
   );
+  
+  modifier onlyOwner {
+      require(msg.sender == owner);
+      _;
+  }
+  
+  function setDragonSoulAddress(address _dragonSoulAddress) public onlyOwner {
+      dragonSoulAddress = _dragonSoulAddress;
+  }
     
-  function setNFTContractAddress(address _nftContractrAddress) public {
+  function setNFTContractAddress(address _nftContractrAddress) public onlyOwner {
       nftContract = _nftContractrAddress;
   }
     
@@ -91,13 +103,12 @@ contract NFTMarket is ReentrancyGuard {
 
     idToMarketItem[itemId].seller.transfer(msg.value);
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
-    
-    DragonFarmToken dragonFarmToken = DragonFarmToken(payable(0x4A3d2a11093851e4965FF1db3f74CD3423b6bF32));
-    dragonFarmToken.approve(idToMarketItem[itemId].seller, price);
-    
     idToMarketItem[itemId].sold = true;
     _itemsSold.increment();
-    payable(owner).transfer(listingPrice);
+    
+    ERC20 dragonSoul = ERC20(payable(dragonSoulAddress));
+    dragonSoul.transferFrom(msg.sender, idToMarketItem[itemId].seller, price);
+    
   }
 
   /* Returns all unsold market items */

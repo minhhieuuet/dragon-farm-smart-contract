@@ -702,19 +702,19 @@
 			]
 		},
 		"contracts/core/erc20/DragonFarmERC20.sol": {
-			"keccak256": "0xcccf586ecf0c5ddcc3f0d33ae8ebf57faebd2eb89cdd36405baf3448098e8615",
+			"keccak256": "0x2b60ee73e39903c829a99e8cda099e0dc140bfc43468f559a02f5b250f7f66d3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd60e5c0cc6179d3f6bac6680d59653fa2bd6ae41f929bc38dd7aa216ab201ea",
-				"dweb:/ipfs/QmR5TxomVVbjvyrjhN4HcPwQu8148ZDxHvamksoAkSRBVM"
+				"bzz-raw://1caa59043d74cb845eeae8328d196d828aa261031a8df95c0ca1bee380d5e491",
+				"dweb:/ipfs/QmTp7N7m4zxfW6XrEdRGUMZGHX9LUXiAxBFb9DpMiQGoWq"
 			]
 		},
 		"contracts/core/erc20/DragonFarmToken.sol": {
-			"keccak256": "0x3e147d828b6885261b2602f11b969434f821e975a035e1eae3f0f4d875fd02ab",
+			"keccak256": "0x53dc063c3a94f2f1d3eb8860e3fadef99f787e0e1737028d7a1c1a02c2b2c9a3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f2a664503b7bbe9dbfbcaeb4d6bf765b4ad3dadedb3fda34653be9c05bb2dd9f",
-				"dweb:/ipfs/QmRKWEKPpDtU6FRnk1vvYg4MX8y2X9sGAkxQVAGvLdYnWR"
+				"bzz-raw://ac4633a3bd28ec82d21c1e875aaa54df7498d5a003ada40aff68106269cea994",
+				"dweb:/ipfs/QmQXfPikFxpbGgQ8T1fcQDcsrF4A53TgVPXsKHDGJFtktm"
 			]
 		},
 		"contracts/core/erc20/ReentrancyGuard.sol": {

@@ -9,12 +9,12 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "name",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "symbol",
 						"type": "string"
 					}
 				],
@@ -496,7 +496,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/core/erc20/DragonFarmERC20.sol": "DragonFarmERC20"
+			"contracts/core/erc20/DragonSoulERC20.sol": "DragonFarmERC20"
 		},
 		"evmVersion": "berlin",
 		"libraries": {},
@@ -558,12 +558,12 @@
 				"dweb:/ipfs/QmPZoN9T3cb6o8bGhjBPZcz7im8T8DWhpr3tjLwhJJHx9N"
 			]
 		},
-		"contracts/core/erc20/DragonFarmERC20.sol": {
-			"keccak256": "0xcccf586ecf0c5ddcc3f0d33ae8ebf57faebd2eb89cdd36405baf3448098e8615",
+		"contracts/core/erc20/DragonSoulERC20.sol": {
+			"keccak256": "0x2b60ee73e39903c829a99e8cda099e0dc140bfc43468f559a02f5b250f7f66d3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd60e5c0cc6179d3f6bac6680d59653fa2bd6ae41f929bc38dd7aa216ab201ea",
-				"dweb:/ipfs/QmR5TxomVVbjvyrjhN4HcPwQu8148ZDxHvamksoAkSRBVM"
+				"bzz-raw://1caa59043d74cb845eeae8328d196d828aa261031a8df95c0ca1bee380d5e491",
+				"dweb:/ipfs/QmTp7N7m4zxfW6XrEdRGUMZGHX9LUXiAxBFb9DpMiQGoWq"
 			]
 		}
 	},

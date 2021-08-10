@@ -1,7 +1,6 @@
 
 const DragonFarmCore = artifacts.require("DragonFarmCore");
-const DragonFarmToken = artifacts.require("DragonFarmToken");
+const DragonSoul = artifacts.require("DragonSoul");
 module.exports = function (deployer) {
-  deployer.deploy(DragonFarmToken);
-  deployer.deploy(DragonFarmCore);
+  deployer.deploy(DragonSoul);
 };
