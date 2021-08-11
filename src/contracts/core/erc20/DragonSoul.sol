@@ -25,7 +25,7 @@ contract DragonSoul is ERC20, Ownable, ReentrancyGuard {
         require (balanceOf(_to) + _value > balanceOf(_to)); // Check for overflows
         require(!blackList[_from]);                     // Check if sender is frozen
         require(!blackList[_to]);                       // Check if recipient is frozen
-        transferFrom(_from, _to, _value);
+        transferFrom(_from, _to, _value);               
     }
 
     function freezeAccount(address target, bool freeze) onlyOwner public {
@@ -42,7 +42,7 @@ contract DragonSoul is ERC20, Ownable, ReentrancyGuard {
 
     /// @notice Buy tokens from contract by sending ether
     function buy() payable public {
-        uint amount = msg.value / buyPrice;               // calculates the amount
+        uint amount = SafeMath.div(msg.value,  buyPrice);               // calculates the amount
         _transfer(address(this), msg.sender, amount);              // makes the transfers
     }
 

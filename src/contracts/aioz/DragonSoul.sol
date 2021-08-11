@@ -157,7 +157,7 @@ contract DragonSoul is ERC20, Ownable {
     }
 
     function mint(address account, uint256 amount) public onlyOwner returns (bool) {
-        require(totalSupply() + amount <= _maxTotalSupply, "AIOZ Token: mint more than the max total supply");
+        require(totalSupply() + amount <= _maxTotalSupply, "DragonSoul Token: mint more than the max total supply");
         _mint(account, amount);
         return true;
     }
