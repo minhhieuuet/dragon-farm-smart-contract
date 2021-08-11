@@ -9,43 +9,48 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract DragonSoul is ERC20, Ownable, ReentrancyGuard {
     using SafeMath for uint256;
     uint256 public maxSupply = 100 * 10**6 * 10**18;
-    uint256 public amountPlayToEarn = 28 * 10**6 * 10**18;
-    uint256 internal amountFarm = 15 * 10**6 * 10**18;
-    uint256 public tokenForManger = 2 * 10**5 * 10**18;
-    
-    constructor() ERC20("Dragon Soul", "DRAS")
+    uint256 public sellPrice;
+    uint256 public buyPrice;
+
+    constructor() ERC20("Dragon Soul", "DRS")
     {
-        _mint(_msgSender(), maxSupply.sub(amountFarm).sub(amountPlayToEarn));
+        _mint(_msgSender(), maxSupply);
     }
 
-    function burn(uint256 amount) public {
-        _burn(_msgSender(), amount);
-    }
-    
-    function _transfer(
-        address sender,
-        address recipient,
-        uint256 amount
-    ) internal virtual override {
-        uint256 transferFeeRate = sender == owner() ? 0 : 5;
-        if (
-            transferFeeRate > 0 &&
-            sender != address(this) &&
-            recipient != address(this)
-        ) {
-            uint256 _fee = amount.mul(transferFeeRate).div(100);
-            super._transfer(sender, address(this), _fee); // TransferFee
-            amount = amount.sub(_fee);
-        }
-
-        super._transfer(sender, recipient, amount);
-    }
-    
-     function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
+     mapping (address => bool) public blackList;
+     /* Internal transfer, only can be called by this contract */
+    function _transfer(address _from, address _to, uint _value) internal override {
+        require (_to != address(0));                               // Prevent transfer to 0x0 address. Use burn() instead
+        require (balanceOf(_from) >= _value);               // Check if the sender has enough
+        require (balanceOf(_to) + _value > balanceOf(_to)); // Check for overflows
+        require(!blackList[_from]);                     // Check if sender is frozen
+        require(!blackList[_to]);                       // Check if recipient is frozen
+        transferFrom(_from, _to, _value);
     }
 
-    function _transferOwnership(address newOwner) public onlyOwner {
-        transferOwnership(newOwner);
+    function freezeAccount(address target, bool freeze) onlyOwner public {
+        blackList[target] = freeze;
+    }
+
+    /// @notice Allow users to buy tokens for `newBuyPrice` eth and sell tokens for `newSellPrice` eth
+    /// @param newSellPrice Price the users can sell to the contract
+    /// @param newBuyPrice Price users can buy from the contract
+    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner public {
+        sellPrice = newSellPrice;
+        buyPrice = newBuyPrice;
+    }
+
+    /// @notice Buy tokens from contract by sending ether
+    function buy() payable public {
+        uint amount = msg.value / buyPrice;               // calculates the amount
+        _transfer(address(this), msg.sender, amount);              // makes the transfers
+    }
+
+    /// @notice Sell `amount` tokens to contract
+    /// @param amount amount of tokens to be sold
+    function sell(uint256 amount) public {
+        require(address(this).balance >= amount * sellPrice);      // checks if the contract has enough ether to buy
+        _transfer(msg.sender, address(this), amount);              // makes the transfers
+        payable(msg.sender).transfer(amount * sellPrice);          // sends ether to the seller. It's important to do this last to avoid recursion attacks
     }
 }
